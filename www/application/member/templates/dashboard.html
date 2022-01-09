@@ -1,0 +1,18 @@
+
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>{{title}}</h1>
+        <p>Utilisateur = {{current_user.name}}</p>
+        <p>{{body}}</p>
+
+        {% if content %}
+            <p>{{content}}</p>
+           {% for file in content %}
+                <img class="preview" src="{{ url_for('member_bp.download_file', name=file) }}">
+            {% endfor %}
+        {% endif %}
+
+    </div>
+{% endblock %}

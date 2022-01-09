@@ -1,0 +1,42 @@
+<header>
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <div class="collapse navbar-collapse">
+            <a href="{{ url_for('base_bp.index') }}" class="navbar-brand">
+                Accueil
+            </a>
+            {% if current_user.is_authenticated %}
+                {% if current_user.admin %}
+                <a href="admin" class="navbar-brand">
+                Admin
+                </a>
+                <a href="{{ url_for('order_bp.show_orders') }}" class="navbar-brand">
+                Commandes
+                </a>
+                {% endif %}
+            <a href="{{ url_for('member_bp.dashboard') }}" class="navbar-brand">
+                Tableau de bord
+            </a>
+            <a href="upload" class="navbar-brand">
+                Télécharger
+            </a>
+            {% endif %}
+            {% if not current_user.is_authenticated %}
+            <a href="{{ url_for('auth_bp.login') }}" class="navbar-brand">
+                Connexion
+            </a>
+            <a href="{{ url_for('auth_bp.signup') }}" class="navbar-brand">
+                Créer un compte
+            </a>
+            {% endif %}
+            {% if current_user.is_authenticated %}
+            <a href="{{ url_for('auth_bp.logout') }}" class="navbar-brand">
+                Déconnexion
+            </a>
+            {% endif %}
+        </div>
+    </nav>
+</header>
+
+
+
+

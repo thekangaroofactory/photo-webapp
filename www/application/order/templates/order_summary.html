@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+  <div class="container">
+    <h1>Commandes</h1>
+    {% for order in orders %}
+    <ul id="order">
+      <li>
+        <span class="field-name">id:</span>
+        <span class="field-value">{{ order.id }}</span>
+      </li>
+      <li>
+        <span class="field-name">folder:</span>
+        <span class="field-value">{{ order.folder }}</span>
+      </li>
+      <li>
+        <span class="field-name">files:</span>
+        <span class="field-value">{{ order.files }}</span>
+      </li>
+    </ul>
+    {% endfor %}
+  </div>
+
+{% endblock %}
