@@ -30,26 +30,26 @@ def upload_file():
         if 'file' not in request.files:
             flash('No file part')
             return redirect(request.url)
-        file = request.files['file']
 
-# >>> for f in request.files.getlist('photo'):
+        # file = request.files['file']
+        for file in request.files.getlist('photo'):
 
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
+            # If the user does not select a file, the browser submits an
+            # empty file without a filename.
+            if file.filename == '':
+                flash('No selected file')
+                return redirect(request.url)
 
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
 
-            # check directory
-            target_path = os.path.join(app.root_path, app.config['UPLOAD_FOLDER'], current_user.name)
-            if not os.path.exists(target_path):
-                os.makedirs(target_path)
+                # check directory
+                target_path = os.path.join(app.root_path, app.config['UPLOAD_FOLDER'], current_user.name)
+                if not os.path.exists(target_path):
+                    os.makedirs(target_path)
 
-            # save file
-            file.save(os.path.join(target_path, filename))
+                # save file
+                file.save(os.path.join(target_path, filename))
 
             # return redirect(url_for('member_bp.download_file', name=filename))
             return redirect(url_for('member_bp.dashboard'))
