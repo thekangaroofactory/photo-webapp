@@ -31,8 +31,14 @@ def upload_file():
             flash('No file part')
             return redirect(request.url)
 
+        print('[DOWNLOAD] -- POST request files:')
+        print([uploaded_file for uploaded_file in request.files.getlist('file')])
+
         # file = request.files['file']
-        for file in request.files.getlist('photo'):
+        for file in request.files.getlist('file'):
+
+            print('[DOWNLOAD] -- Looping over files:')
+            print(file)
 
             # If the user does not select a file, the browser submits an
             # empty file without a filename.
@@ -51,8 +57,8 @@ def upload_file():
                 # save file
                 file.save(os.path.join(target_path, filename))
 
-            # return redirect(url_for('member_bp.download_file', name=filename))
-            return redirect(url_for('member_bp.dashboard'))
+        # return redirect(url_for('member_bp.download_file', name=filename))
+        return redirect(url_for('member_bp.dashboard'))
     return render_template('upload.html')
 
 
