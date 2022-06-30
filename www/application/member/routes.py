@@ -68,6 +68,14 @@ def download_file(name):
     return send_from_directory(os.path.join(app.config["UPLOAD_FOLDER"], current_user.name), name)
 
 
+@member_bp.route('/delete/<file>')
+@login_required
+def delete_file(file):
+    if os.path.exists(os.path.join(app.config["UPLOAD_FOLDER"], current_user.name, file)):
+        os.remove(os.path.join(app.config["UPLOAD_FOLDER"], current_user.name, file))
+    return redirect(url_for('member_bp.dashboard'))
+
+
 @member_bp.route('/dashboard', methods=['GET'])
 @login_required
 def dashboard():

@@ -39,3 +39,100 @@ h2 {
     border: 1px solid;
     border-radius: 5px;
 }
+
+/* ------- Experimental: dashboard page (uploaded images) -------- */
+
+* {box-sizing: border-box}
+
+.row {
+  margin: 8px -16px;
+}
+
+/* Add padding BETWEEN each column (if you want) */
+.row,
+.row > .column {
+  padding: 8px;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  /*width: 33.33%;*/
+  display: block;
+}
+
+/* Clear floats after rows */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* ------- Experimental: dashboard page (uploaded images) -------- */
+
+/* Container needed to position the overlay. Adjust the width as needed */
+.img-container {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+
+  background-color: white;
+  padding: 10px;
+}
+
+/* Make the image to responsive */
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The overlay effect - lays on top of the container and over the image */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1;
+  width: 100%;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+/* When you mouse over the container, fade in the overlay title */
+.img-container:hover .overlay {
+  opacity: 1;
+}
+
+/* ------- Experimental: dashboard page (uploaded images) -------- */
+
+/* Style the button and place it in the middle of the container/image */
+.overlay .btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: white;
+  color: black;
+  font-size: 16px;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Red */
+.overlay .danger {
+  color: red
+}
+
+.overlay .danger:hover {
+  background: #f44336;
+  color: white;
+}

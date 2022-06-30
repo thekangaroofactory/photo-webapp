@@ -4,15 +4,38 @@
 {% block content %}
     <div class="container">
         <h1>{{title}}</h1>
+
+        <!--
         <p>Utilisateur = {{current_user.name}}</p>
         <p>{{body}}</p>
+        -->
 
+        <!--
         {% if content %}
             <p>{{content}}</p>
            {% for file in content %}
-                <img class="preview" src="{{ url_for('member_bp.download_file', name=file) }}">
+                <img class="preview" src="{{ url_for('member_bp.download_file', name=file) }}" onclick="window.location.href='your_flask_route/{{file}}';">
             {% endfor %}
         {% endif %}
+        -->
+
+        {% if content %}
+            <div class="row">
+            {% for file in content %}
+                <div class="column">
+                    <div class="img-container">
+                    <div class="overlay"> x <button class="btn danger" onclick="window.location.href='delete/{{file}}';"><i class="fa fa-trash"></i></button></div>
+                    <img src="{{ url_for('member_bp.download_file', name=file) }}" alt="photo" style="width:100%" class="image">
+                    <h4>Mountains</h4>
+                    <p>image : {{file}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        {% endif %}
+
+
+
 
     </div>
 {% endblock %}
