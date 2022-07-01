@@ -1,10 +1,16 @@
 
 from flask import Blueprint, current_app
 from flask import render_template
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 from application.order.orders import get_orders
 from application.admin.tools import admin_required
+
+import time
+from io import BytesIO
+import zipfile
+import os
+from flask import send_file
 
 app = current_app
 
@@ -22,3 +28,19 @@ def show_orders():
         'order_summary.html',
         orders=get_orders()
     )
+
+
+@app.route('/zipped/<folder>')
+def zipped_data(folder):
+    time_str = time.strftime("%Y%m%d-%H%M%S")
+    file_name = "my_data_dump_{}.zip".format(time_str)
+    memory_file = BytesIO()
+    file_path = os.path.join(app.config["UPLOAD_FOLDER"], folder)
+    with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zipf:
+        for root, dirs, files in os.walk(file_path):
+            for file in files:
+                zipf.write(os.path.join(root, file))
+    memory_file.seek(0)
+    return send_file(memory_file,
+                     attachment_filename=file_name,
+                     as_attachment=True)

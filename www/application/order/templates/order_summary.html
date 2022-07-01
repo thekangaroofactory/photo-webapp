@@ -17,6 +17,7 @@
       <li>
         <span class="field-name">files:</span>
         <span class="field-value">{{ order.files }}</span>
+        <button class="btn" onclick="window.location.href='zipped/{{ order.folder }}';"><i class="fa fa-download"></i> Download</button>
       </li>
     </ul>
     {% endfor %}
