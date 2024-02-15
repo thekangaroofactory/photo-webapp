@@ -9,7 +9,7 @@ DEBUG = True
 # Flask
 # FLASK_APP = 'wsgi.py'
 FLASK_ENV = 'development'
-SECRET_KEY = 'htkpm5Oswy6ncp69xjuywzklopm52'
+SECRET_KEY = 'xxxxxx'
 
 # Database
 SQLALCHEMY_DATABASE_URI = environ.get("SQLALCHEMY_DATABASE_URI")
