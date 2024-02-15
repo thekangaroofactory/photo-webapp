@@ -2,7 +2,10 @@
 
 {% block content %}
 
-  <div class="container">
+<link href="{{url_for('.static', filename='css/order.css')}}" rel="stylesheet"/>
+
+<!-- old display
+  <div class="row">
     <h1>Commandes</h1>
     {% for order in orders %}
     <ul id="order">
@@ -22,5 +25,29 @@
     </ul>
     {% endfor %}
   </div>
+-->
+
+  <!-- New display -->
+
+  <div class="container">
+    <h1>Commandes</h1>
+    {% for order in orders %}
+      <div class="ord-container">
+        <div class="ord-info">
+          <p>id: {{ order.id }}</p>
+          <p>Répertoire: {{ order.folder }}</p>
+        </div>
+        <div class="ord-files">
+          <p>Nombre de fichiers: {{ order.files|length }}</p>
+          <p>Fichiers: {{ order.files }}</p>
+        </div>
+        <div class="download">
+          <p>Télécharger</p>
+          <button class="btn" onclick="window.location.href='zipped/{{ order.folder }}';"><i class="fa fa-download"></i> Télécharger</button>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
 
 {% endblock %}

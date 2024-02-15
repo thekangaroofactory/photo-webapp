@@ -1,6 +1,6 @@
 
 from flask import Blueprint, current_app
-from flask import render_template
+from flask import render_template, send_from_directory
 from flask_login import login_required, current_user
 
 from application.order.orders import get_orders
@@ -15,7 +15,10 @@ from flask import send_file
 app = current_app
 
 # Blueprint Configuration
-order_bp = Blueprint('order_bp', __name__, template_folder='templates')
+order_bp = Blueprint('order_bp', __name__,
+                     template_folder='templates',
+                     static_folder='static',
+                     static_url_path='/order_bp/static/')
 
 
 @order_bp.route('/order', methods=['GET'])
@@ -28,6 +31,13 @@ def show_orders():
         'order_summary.html',
         orders=get_orders()
     )
+
+
+@order_bp.route('/get_img/<folder>/<file>', methods=['GET'])
+@login_required
+@admin_required
+def get_img(folder, file):
+    return send_from_directory(os.path.join(app.config["UPLOAD_FOLDER"], folder), file)
 
 
 @app.route('/zipped/<folder>')
